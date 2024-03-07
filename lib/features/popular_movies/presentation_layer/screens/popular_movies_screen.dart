@@ -42,24 +42,26 @@ class PopularMoviesScreen extends StatelessWidget {
                 itemBuilder: (context, index) => MovieItemWidget(
                   movie: state.popularMoviesEntity.movies[index],
                   onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return FadeTransition(
-                          opacity: CurvedAnimation(
-                            parent: ModalRoute.of(context)!.animation!,
-                            curve: Curves.easeInOut,
-                          ),
-                          child: MovieDetailsWidget(
-                            movie: state.popularMoviesEntity.movies[index],
-                          ),
-                        );
-                      },
-                    );
+                    showGeneralDialog(
+                        context: context,
+                        transitionDuration: const Duration(milliseconds: 500),
+                        barrierDismissible: true,
+                        barrierLabel: '',
+                        pageBuilder: (context, animation1, animation2) =>
+                            Container(),
+                        transitionBuilder: (context, animation1, animation2,
+                                widget) =>
+                            FadeTransition(
+                              opacity: Tween<double>(begin: 0.5, end: 1.0)
+                                  .animate(animation1),
+                              child: MovieDetailsWidget(
+                                  movie:
+                                      state.popularMoviesEntity.movies[index]),
+                            ));
                   },
                 ),
                 separatorBuilder: (context, index) => const Divider(
-                  height: 30.0,
+                  height: 40.0,
                 ),
                 itemCount: state.popularMoviesEntity.movies.length,
               );

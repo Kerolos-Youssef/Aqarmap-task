@@ -104,6 +104,6 @@ class MovieItemWidget extends StatelessWidget {
           ],
         ),
       ),
-    ).addAction(onTap: onPressed);
+    ).addAction(onGesture: onPressed);
   }
 }
